@@ -74,6 +74,18 @@ ul {
     margin-left:38%;
     cursor:pointer;
 }
+.tapmenus{
+    width:100%;
+}
+.tapmenus > button{
+    width:100px;
+    padding:1%;
+    margin: 10px 3px;
+    background-color: transparent;
+    border:1px solid #eee;
+    border-radius: 5px;
+    cursor:pointer;
+}
 #app {
     box-sizing: border-box;
     font-family: "consolas";

@@ -1,26 +1,29 @@
 <template>
-  <div>
+  <div v-if="step == 0 ">
     <Post v-for="(a,index) in vuestaData" :key="index"
-          :vuestaData="vuestaData[index]" />
-  </div>
+          :vuestaData="vuestaData[index]"
 
+    />
+  </div>
   <!-- 필터선택페이지 -->
-  <div class="upload-image"></div>
-  <div class="filters">
-    <div class="filter-1"></div>
-    <div class="filter-1"></div>
-    <div class="filter-1"></div>
-    <div class="filter-1"></div>
-    <div class="filter-1"></div>
+  <div v-if="step == 1 ">
+    <div class="upload-image" :style="`background-image:url(${ imgfile })`"></div>
+    <div class="filters">
+      <div class="filter-1"></div>
+      <div class="filter-1"></div>
+      <div class="filter-1"></div>
+      <div class="filter-1"></div>
+      <div class="filter-1"></div>
+    </div>
   </div>
 
   <!-- 글작성페이지 -->
-  <div class="upload-image"></div>
-  <div class="write">
-    <textarea class="write-box">write!</textarea>
+  <div v-if="step == 2 ">
+    <div class="upload-image" :style="`background-image:url(${ imgfile })`"></div>
+    <div class="write">
+      <textarea @input="$emit('write',$event.target.value)" class="write-box">write!</textarea>
+    </div>
   </div>
-
-
 </template>
 
 <script>
@@ -30,6 +33,8 @@ export default {
   name: 'Container',
   props: {
     vuestaData :Array,
+    step: Number,
+    imgfile: String,
 
   },
   components: {
