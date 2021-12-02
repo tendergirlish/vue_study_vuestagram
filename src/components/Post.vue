@@ -4,7 +4,7 @@
       <div class="profile" :style="{ backgroundImage: `url(${vuestaData.userImage})` } "></div>
       <span class="profile-name">{{ vuestaData.name }}</span>
     </div>
-    <div class="post-body" :style="{ backgroundImage: `url(${vuestaData.postImage})` } " />
+    <div :class="vuestaData.filter" class="post-body" :style="{ backgroundImage: `url(${vuestaData.postImage})` } " />
     <div class="post-content">
       <p>❤️{{ vuestaData.likes }}</p>
       <p><strong>{{ vuestaData.name }}</strong> {{ vuestaData.content }}</p>
@@ -14,15 +14,26 @@
 </template>
 
 <script>
+import Vustadata from "../assets/Vustadata";
+
 export default {
   name: 'Container',
+  data (){
+    return{
+      filter :'',
+
+    }
+  },
   props: {
     vuestaData : Object,
 
   },
   components: {
 
-  }
+  },
+  mounted() {
+
+  },
 }
 </script>
 

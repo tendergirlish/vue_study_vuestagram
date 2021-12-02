@@ -7,19 +7,18 @@
   </div>
   <!-- 필터선택페이지 -->
   <div v-if="step == 1 ">
-    <div class="upload-image" :style="`background-image:url(${ imgfile })`"></div>
+    <div :class="chosefilter" class="upload-image" :style="`background-image:url(${ imgfile })`"></div>
+
     <div class="filters">
-      <div class="filter-1"></div>
-      <div class="filter-1"></div>
-      <div class="filter-1"></div>
-      <div class="filter-1"></div>
-      <div class="filter-1"></div>
+      <filterbox :filter="filter" :imgfile="imgfile" v-for="filter in filters" :key="filter">
+        {{filter}}  <!-- slot 으로 필터이름 보내기 -->
+      </filterbox>
     </div>
   </div>
 
   <!-- 글작성페이지 -->
   <div v-if="step == 2 ">
-    <div class="upload-image" :style="`background-image:url(${ imgfile })`"></div>
+    <div :class="chosefilter" class="upload-image" :style="`background-image:url(${ imgfile })`"></div>
     <div class="write">
       <textarea @input="$emit('write',$event.target.value)" class="write-box">write!</textarea>
     </div>
@@ -28,18 +27,36 @@
 
 <script>
 import Post from "./Post";
+import filterbox from "./Filterbox"
 
 export default {
   name: 'Container',
+  data() {
+    return {
+      filters: ["aden", "_1977", "brannan", "brooklyn", "clarendon", "earlybird", "gingham", "hudson",
+        "inkwell", "kelvin", "lark", "lofi", "maven", "mayfair", "moon", "nashville", "perpetua",
+        "reyes", "rise", "slumber", "stinson", "toaster", "valencia", "walden", "willow", "xpro2"],
+      chosefilter: '',
+    }
+  },
   props: {
-    vuestaData :Array,
+    vuestaData: Array,
     step: Number,
     imgfile: String,
+    likesnumber: Number,
 
   },
   components: {
-    Post : Post,
-  }
+    Post: Post,
+    filterbox: filterbox,
+
+  },
+  mounted() {
+    this.emitter.on('clickfire', (a) => {
+      this.chosefilter = a
+    })
+  },
+
 }
 </script>
 

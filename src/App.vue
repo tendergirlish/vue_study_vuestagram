@@ -1,7 +1,7 @@
 <template>
   <div class="header">
     <ul class="header-button-left">
-      <li  @click="step--" >Cancel</li>
+      <li v-if="step == 1 || step == 2 "  @click="step--" >Cancel</li>
     </ul>
     <ul class="header-button-right">
       <li v-if=" step == 1"  @click="step++">Next</li>
@@ -18,9 +18,8 @@
 <!--  </div>-->
 
 <!-- container -->
-  <Container @write="write = $event " :vuestaData="vuestaData" :step="step" :imgfile="imgfile" />
+  <Container :class="chosefilter" @write="write = $event " :vuestaData="vuestaData" :step="step" :imgfile="imgfile" />
   <button class="morebtn" @click="more">더보기</button>
-
 
   <div class="footer">
     <ul class="footer-button-plus">
@@ -28,14 +27,6 @@
       <label for="file" class="input-plus">+</label>
     </ul>
   </div>
-
-  <!-- tap 맨드는거 -->
-<!--  <div v-if="step == 0">내용0</div>-->
-<!--  <div v-if="step == 1">내용1</div>-->
-<!--  <div v-if="step == 2">내용2</div>-->
-<!--  <button @click=" step = 0 ">Main</button>-->
-<!--  <button @click=" step = 1 ">Filter</button>-->
-<!--  <button @click=" step = 2 ">Write</button>-->
 
 </template>//end
 
@@ -53,6 +44,9 @@ export default {
       step: 0,
       imgfile: '',
       write: '',
+      likesnumber :'',
+      chosefilter :'',
+
     }
   },
   methods:{
@@ -77,15 +71,23 @@ export default {
          name: "내가 쓴 게시물",
          userImage: "https://placeimg.com/100/100/arch",
          postImage: this.imgfile,
-         likes: 77,
+         likes: this.likesnumber,
          date: "July 7",
          liked: true,
          content: this.write,
-         filter: "perpetua"
+         filter: this.chosefilter,
        }
        this.vuestaData.unshift(mywrite);
+       // this.likesnumber = Math.random()*100;
+       this.likesnumber = Math.floor(Math.random() * 100) + 1 ;
        this.step = 0;
+
     },
+  },
+  mounted() {
+    this.emitter.on('clickfire', (a) => {
+      this.chosefilter = a
+    })
   },
   components: {
     Container :Container,
