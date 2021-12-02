@@ -10,12 +10,17 @@
     <img src="./assets/logo.png" class="logo" />
   </div>
 
+<!-- vuex store data -->
+    <h4>안녕 {{ $store.state.name }}</h4>
+    <h5>count: {{ $store.state.age }} </h5>
+    <button @click="$store.commit('changename')"> show ID </button>
+    <button @click="$store.commit('plusAge')"> Count Up </button>
 <!-- tap btn  -->
-<!--  <div class="tapmenus">-->
-<!--    <button @click=" step = 0 ">Main</button>-->
-<!--    <button @click=" step = 1 ">Filter</button>-->
-<!--    <button @click=" step = 2 ">Write</button>-->
-<!--  </div>-->
+  <!--  <div class="tapmenus">-->
+  <!--    <button @click=" step = 0 ">Main</button>-->
+  <!--    <button @click=" step = 1 ">Filter</button>-->
+  <!--    <button @click=" step = 2 ">Write</button>-->
+  <!--  </div>-->
 
 <!-- container -->
   <Container :class="chosefilter" @write="write = $event " :vuestaData="vuestaData" :step="step" :imgfile="imgfile" />
