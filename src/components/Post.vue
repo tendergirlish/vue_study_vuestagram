@@ -4,9 +4,9 @@
       <div class="profile" :style="{ backgroundImage: `url(${vuestaData.userImage})` } "></div>
       <span class="profile-name">{{ vuestaData.name }}</span>
     </div>
-    <div :class="vuestaData.filter" class="post-body" :style="{ backgroundImage: `url(${vuestaData.postImage})` } " />
+    <div @click="$store.commit('likescore')" :class="vuestaData.filter" class="post-body" :style="{ backgroundImage: `url(${vuestaData.postImage})` } " />
     <div class="post-content">
-      <p>❤️{{ vuestaData.likes }}</p>
+      <p>❤️{{ $store.state.likes }}</p>
       <p><strong>{{ vuestaData.name }}</strong> {{ vuestaData.content }}</p>
       <p class="date">{{ vuestaData.date }}</p>
     </div>
@@ -14,8 +14,6 @@
 </template>
 
 <script>
-import Vustadata from "../assets/Vustadata";
-
 export default {
   name: 'Container',
   data (){

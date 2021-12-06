@@ -14,7 +14,8 @@
     <h4>안녕 {{ $store.state.name }}</h4>
     <h5>count: {{ $store.state.age }} </h5>
     <button @click="$store.commit('changename')"> show ID </button>
-    <button @click="$store.commit('plusAge')"> Count Up </button>
+    <button @click="$store.commit('plusAge', 10 )"> Count Up </button>
+
 <!-- tap btn  -->
   <!--  <div class="tapmenus">-->
   <!--    <button @click=" step = 0 ">Main</button>-->
@@ -25,6 +26,11 @@
 <!-- container -->
   <Container :class="chosefilter" @write="write = $event " :vuestaData="vuestaData" :step="step" :imgfile="imgfile" />
   <button class="morebtn" @click="more">더보기</button>
+
+
+<!-- store actions -->
+  <p>{{ 내나이 }}{{age}}{{likes}}</p>
+<!--  <button class="morebtn" @click="$store.dispatch('getData')">더보기</button>-->
 
   <div class="footer">
     <ul class="footer-button-plus">
@@ -39,6 +45,7 @@
 import Container from './components/Container'
 import Vustadata from './assets/Vustadata'
 import axios from 'axios'
+import {mapState} from 'vuex'
 
 export default {
   name: 'App',
@@ -51,14 +58,19 @@ export default {
       write: '',
       likesnumber :'',
       chosefilter :'',
+      counter:0,
 
     }
+  },
+  computed:{ // 걔계산 결과 저장용 함수
+    name(){
+      return this.$store.state.name
+    },
   },
   methods:{
     more(){
       axios.get(`https://codingapple1.github.io/vue/more${this.moredata}.json`)
           .then( 결과 =>{
-            console.log(결과.data);
             this.vuestaData.push(결과.data);
             this.moredata++;
         })
