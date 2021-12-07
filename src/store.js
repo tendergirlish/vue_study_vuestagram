@@ -1,29 +1,29 @@
-import { createStore } from 'vuex'
+import {createStore} from 'vuex'
 import axios from "axios";
 
 const store = createStore({
-    state(){
+    state() {
         return {
-            name:'kwon',
-            age:20,
+            name: 'kwon',
+            age: 20,
             likes: 20,
-            likesOn:false,
-            more :{},
+            likesOn: false,
+            more: {},
         }
     },
-    mutations:{
+    mutations: {
         //state 값변경
-        changename(state){
+        changename(state) {
             state.name = 'tendergirl'
         },
-        plusAge(state, payload ){
+        plusAge(state, payload) {
             state.age += payload
         },
-        likescore(state){
-            if( state.likesOn == false ){
+        likescore(state) {
+            if (state.likesOn == false) {
                 state.likes++;
                 state.likesOn = true;
-            }else{
+            } else {
                 state.likes--;
                 state.likesOn = false;
             }
@@ -32,14 +32,14 @@ const store = createStore({
             state.more = data
         }
     },
-    actions:{ //ajax요청 또는 오래 걸리는 작업 작성 : actions
+    actions: { //ajax요청 또는 오래 걸리는 작업 작성 : actions
         //데이터 가져오기 = get
-        getData( context){
+        getData(context) {
             axios.get(`https://codingapple1.github.io/vue/more0.json`)
-                .then((a) =>{
-                    console.log( a.data );
-                   context.commit('setMore', a.data);
-            })
+                .then((a) => {
+                    console.log(a.data);
+                    context.commit('setMore', a.data);
+                })
         }
 
     }
